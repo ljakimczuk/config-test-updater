@@ -14,7 +14,7 @@ jobs:
         id: repolist
         run: |
           list=""
-          for r in $(cat config.list); do list+="\"$r\", "; done
+          for r in $(cat config.list); do list+="$r, "; done
           echo "repolist=[${list::-2}]" >> "$GITHUB_OUTPUT"
   trigger-repo-update:
     runs-on: ubuntu-latest
