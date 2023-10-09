@@ -11,6 +11,13 @@ jobs:
         with:
           submodules: recursive
       - name: Update submodules
+        id: status
         run: |
           git submodule update --remote
-          git status
+          git status -s >> "$GITHUB_OUTPUT"
+      - name: Commit change
+        if: ${{ steps.status.outputs.stdout != '' }}
+        run: |
+          git add -A
+          git commit -m "Updating submodule $(date)"
+          git push origin main
