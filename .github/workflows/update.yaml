@@ -21,7 +21,7 @@ jobs:
     needs: get-repo-list
     strategy:
       matrix:
-        repository: ${{ fromJSON(needs.get-repo-list.outputs.repolist) }}
+        repository: "${{ needs.get-repo-list.outputs.repolist }}"
     steps:
       - name: Trigger update
         run: |
