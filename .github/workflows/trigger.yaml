@@ -24,4 +24,7 @@ jobs:
     steps:
       - name: Trigger update
         run: |
-          echo ${{ matrix.repository }}
+          curl -X POST 'https://api.github.com/repos/${{ matrix.repository }}/actions/workflows/update.yaml/dispatches' \
+          -H 'Accept: application/vnd.github.everest-preview+json' \
+          -H 'Authorization: Bearer ${{ secrets.BOT_GITHUB_TOKEN }}' \
+          -d '{"ref":"main"}'
