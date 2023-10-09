@@ -17,7 +17,7 @@ jobs:
           git status -s
           [[ "$(git status -s)" != "" ]] && echo "status=1" >> "$GITHUB_OUTPUT" || echo "status=0" >> "$GITHUB_OUTPUT"
       - name: Commit change
-        if: ${{ steps.status.outputs.stdout == 1 }}
+        if: ${{ steps.status.outputs.status == 1 }}
         run: |
           git add -A
           git commit -m "Updating submodule $(date)"
