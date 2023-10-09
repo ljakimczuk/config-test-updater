@@ -14,9 +14,10 @@ jobs:
         id: status
         run: |
           git submodule update --remote
+          [[ "$(git status -s)" == "" ]] && echo 1 >> "$GITHUB_OUTPUT" || echo 0 >> "$GITHUB_OUTPUT"
           git status -s >> "$GITHUB_OUTPUT"
       - name: Commit change
-        if: ${{ steps.status.outputs.stdout != '' }}
+        if: steps.status.outputs.stdout == 1
         run: |
           git add -A
           git commit -m "Updating submodule $(date)"
