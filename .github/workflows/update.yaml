@@ -15,7 +15,7 @@ jobs:
         run: |
           git submodule update --remote
           git status -s
-          [[ "$(git status -s)" != "" ]] && echo "status=1" >> "$GITHUB_OUTPUT" || echo "status=0" >> "$GITHUB_OUTPUT"
+          [[ "$(git status -s)" != "" ]] && echo "status=1" >> "$GITHUB_OUTPUT"
       - name: Commit change
         if: ${{ steps.status.outputs.status == 1 }}
         run: |
